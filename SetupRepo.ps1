@@ -9,6 +9,7 @@ Param(
 	[Security.SecureString]$githubPassword,
 	
 	[bool]$create = $true,
+	[bool]$gradle = $false,
 	[string]$repoFolder = "$env:userprofile\Documents\Git Repos"
 )
 
@@ -61,7 +62,18 @@ git pull
 
 # Copy contents to new repo folder (excluding main.gradle and SetupRepo.ps1)
 $exclusion = @('.git', 'main.gradle', '*.ps1')
-Copy-Item * ../$repoName/ -Force -Exclude $exclusion
+Copy-Item * ../$repoName/ -Recurse -Force -Exclude $exclusion
 
-# Finally, open the new build.properties file for editing
-notepad "../$repoName/build.properties"
+Set-Location ../$repoName/
+
+if ($gradle) {
+	# Finally, open the new build.properties file for editing, and wait for it to be closed before continuing
+	Start-Process Notepad.exe "build.properties" -Wait
+	
+	# Execute main gradle tasks
+	.\gradlew setupDecompWorkspace
+	.\gradlew idea
+} else {
+	# Finally, open the new build.properties file for editing
+	notepad "build.properties"
+}
