@@ -19,10 +19,6 @@ Function ConvertTo-PlainText( [security.securestring]$secure ) {
 	$marshal::PtrToStringAuto( $marshal::SecureStringToBSTR($secure) )
 }
 
-Function Validate-Parameter($name, $string) {
-	if (($string -eq '') -or !($string -as [string])) {throw "$name cannot be null";}
-}
-
 $githubPasswordPlain = ConvertTo-PlainText $githubPassword
 
 # Move to the defined repo folder
