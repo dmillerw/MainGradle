@@ -73,6 +73,9 @@ if ($gradle) {
 	# Execute main gradle tasks
 	.\gradlew setupDecompWorkspace
 	.\gradlew idea
+	
+	# Open new project file in IntelliJ
+	Invoke-Item "$repoName.ipr"
 } else {
 	# Finally, open the new build.properties file for editing
 	notepad "build.properties"
