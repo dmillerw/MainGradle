@@ -61,7 +61,7 @@ Set-Location "MainGradle"
 git pull
 
 # Copy contents to new repo folder (excluding main.gradle and SetupRepo.ps1)
-$exclusion = @('.git', 'main.gradle', '*.ps1')
+$exclusion = @('.git', 'main.gradle', 'scripts/*')
 Copy-Item * ../$repoName/ -Recurse -Force -Exclude $exclusion
 
 Set-Location ../$repoName/
