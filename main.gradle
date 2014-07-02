@@ -17,10 +17,7 @@ minecraft {
     replace "%FORGE_VERSION%", config.forge_version
 }
 
-version = "${config.minecraft_version}-${config.mod_version}"
-if (System.getenv("BUILD_NUMBER") != null) {
-    version += "-b" + System.getenv("BUILD_NUMBER");
-}
+version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
