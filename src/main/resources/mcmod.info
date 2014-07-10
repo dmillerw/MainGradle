@@ -1,0 +1,13 @@
+[
+{
+  "modid": "Generic",
+  "name": "Generic Mod",
+  "description": "Generic Description",
+  "version": "${mod_version}",
+  "mcversion": "${minecraft_version}",
+  "authors": [ "dmillerw" ],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]
