@@ -11,6 +11,7 @@ group = config.mod_group
 archivesBaseName = config.mod_archive_name
 
 minecraft {
+    assetDir = "run/assets"
     version = config.minecraft_version + "-" + config.forge_version
     replaceIn config.mod_info_path
     replace "%MOD_VERSION%", config.mod_version
