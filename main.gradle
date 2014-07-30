@@ -18,7 +18,7 @@ minecraft {
     replace "%FORGE_VERSION%", config.forge_version
 }
 
-version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+version = "${config.minecraft_version}-${config.mod_version}.B${System.getenv("BUILD_NUMBER") ?: 0}"
 
 processResources {
     // replace stuff in mcmod.info, nothing else
