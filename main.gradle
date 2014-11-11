@@ -1,22 +1,22 @@
-version = config.mod_version
-group = config.mod_group
-archivesBaseName = config.mod_archive_name
+version = mod_version
+group = mod_group
+archivesBaseName = mod_archive_name
 
 minecraft {
     assetDir = "run/assets"
-    version = project.minecraft_version + "-" + project.forge_version
-    replaceIn project.mod_info_path
+    version = minecraft_version + "-" + forge_version
+    replaceIn mod_info_path
     replace "%MOD_VERSION%", config.mod_version
     replace "%FORGE_VERSION%", config.forge_version
 }
 
-display_version = project.display_version ?: project.minecraft_version
+display_version = display_version ?: minecraft_version
 version = "${display_version}-${project.mod_version}.B${System.getenv("BUILD_NUMBER") ?: 0}"
 
 curse {
     if (System.getenv("curse")) {
         apiKey = System.getenv("api_key")
-        projectId = project.curse_project_id
+        projectId = curse_project_id
         changelog = "NOT YET IMPLEMENTED!"
         releaseType = "release"
     }
@@ -28,7 +28,7 @@ processResources {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'mod_version':project.version, 'minecraft_version':project.minecraft.version
+        expand 'mod_version':version, 'minecraft_version':minecraft.version
     }
         
     // copy everything else, thats not the mcmod.info
