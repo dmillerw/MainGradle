@@ -1,25 +1,26 @@
-ext.configFile = file "build.properties"
-
-configFile.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
-
 version = config.mod_version
 group = config.mod_group
 archivesBaseName = config.mod_archive_name
 
 minecraft {
     assetDir = "run/assets"
-    version = config.minecraft_version + "-" + config.forge_version
-    replaceIn config.mod_info_path
+    version = project.minecraft_version + "-" + project.forge_version
+    replaceIn project.mod_info_path
     replace "%MOD_VERSION%", config.mod_version
     replace "%FORGE_VERSION%", config.forge_version
 }
 
-display_version = config.display_version ?: config.minecraft_version
-version = "${display_version}-${config.mod_version}.B${System.getenv("BUILD_NUMBER") ?: 0}"
+display_version = project.display_version ?: project.minecraft_version
+version = "${display_version}-${project.mod_version}.B${System.getenv("BUILD_NUMBER") ?: 0}"
+
+curse {
+    if (System.getenv("curse")) {
+        apiKey = System.getenv("api_key")
+        projectId = project.curse_project_id
+        changelog = "NOT YET IMPLEMENTED!"
+        releaseType = "release"
+    }
+}
 
 processResources {
     // replace stuff in mcmod.info, nothing else
