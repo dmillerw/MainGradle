@@ -21,15 +21,6 @@ minecraft {
 display_version = config.display_version ?: config.minecraft_version
 version = "${display_version}-${config.mod_version}.B${System.getenv("BUILD_NUMBER") ?: 0}"
 
-curse {
-    if (System.getenv("curse")) {
-        apiKey = System.getenv("api_key")
-        projectId = config.curse_project_id
-        changelog = "NOT YET IMPLEMENTED!"
-        releaseType = "release"
-    }
-}
-
 processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
